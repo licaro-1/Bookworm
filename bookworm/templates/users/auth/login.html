@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block head %}
+<link href="{% static 'css/auth.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+<div class="form_auth__wrapper">
+    <h1>Вход в аккаунт</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {{ form.non_field_errors|join:"<br>" }}
+            </div>
+        {% endif %}
+        <div class="mb-3">
+            {{ form.username|add_class:"form-control form_auth__input"|attr:"placeholder:Почта" }}
+            {% if form.username.errors %}
+                <div class="invalid_feedback">
+                    {{ form.username.errors|join:"<br>" }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="mb-3 form_auth__input_mt">
+            {{ form.password|add_class:"form-control form_auth__input input_mt"|attr:"placeholder:Пароль"}}
+            {% if form.password.errors %}
+                <div class="invalid_feedback">
+                    {{ form.password.errors|join:"<br>" }}
+                </div>
+            {% endif %}
+        </div>
+        <button type="submit" class="form_auth__btn w-100">Войти</button>
+        <div class="other-auth-method">
+            <div>или</div>
+            <a href="{% url 'users:signup' %}" class="signup_link">Зарегистрируйтесь</a>
+        </div>
+        <a href="{% url 'users:password_reset' %}" class="forgot_password">Забыли пароль?</a>
+     </form>
+</div>
+{% endblock %}

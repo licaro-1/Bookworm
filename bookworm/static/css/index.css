@@ -1,0 +1,140 @@
+
+.books_form_search {
+    margin-top: 60px;
+}
+
+.form__search__input:focus {
+  border-color: rgb(244, 115, 73, 0.3);
+  outline: none;
+}
+
+.books__wrapper{
+    margin-top: 52px;
+}
+
+.page_obj_empty {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 600;
+    margin-top: 200px;
+}
+
+.books__card {
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+.book__card {
+    padding: 14px 8px;
+}
+
+
+.books__card:hover {
+    transform: scale(1.05);
+    transition: all 0.3s ease-in-out;
+}
+
+
+.book__image__wrapper {
+    max-width: 140px;
+    max-height: 170px;
+}
+
+.image__column {
+    padding-right: 0;
+}
+
+.book__image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    box-shadow: 4px -4px 8px 0 rgba(0, 0, 0, 0.1), -5px 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.book__info {
+    padding: 10px 20px 20px 0;
+}
+
+.book__title {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.book__title__link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.book__descr {
+    margin-top: 15px;
+    margin-bottom: 0;
+    font-weight: 300;
+    font-size: 14px;
+    max-height: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+}
+
+/* book_rating_and_comments */
+
+.sm_font {
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.book_rating_comments_statistic {
+    display: flex;
+    margin-top: 8px
+}
+
+.book_rating, .book_comments {
+    display: flex;
+    align-items: center;
+}
+
+.book_rating_value, .book_comments_value {
+    padding-left: 4px;
+    vertical-align: middle;
+}
+
+.book_comments {
+    margin-left: 10px;
+}
+
+#modal_book_create {
+    font-size: 14px;
+}
+
+.modal__add_book_form {
+    padding: 40px;
+}
+
+.form__book_author_and_pub_date {
+    margin-top: 20px;
+}
+
+.modal__add_book_form input:hover,
+.modal__add_book_form input:active,
+.modal__add_book_form input:focus,
+.modal__add_book_form textarea:hover,
+.modal__add_book_form textarea:focus  {
+    box-shadow: none;
+    border: 1px #f47349 solid;
+}
+
+
+
+#form__book_add_file_upload {
+    max-width: 300px;
+}
+
+
+.modal__add_book_file_upload_label {
+    font-size: 13px;
+}

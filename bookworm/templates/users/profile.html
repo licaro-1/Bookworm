@@ -1,0 +1,245 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% load widget_tweaks %}
+
+{% block head %}
+<link href="{% static 'css/book_detail.css' %}" rel="stylesheet">
+<link href="{% static 'css/profile.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}{{ user.username }} - Bookworm{% endblock %}
+
+
+{% block content %}
+<div class="profile__wrapper">
+    <div class="row profile__info_row">
+        <div class="col-md-3">
+            <div class="profile__img_wrapper">
+                <img src="{{S3_DIR_USER_IMAGES_URL}}{{user.avatar}}" alt="profile avatar" class="profile__img">
+            </div>
+        </div>
+        <div class="col-md-7 profile__info">
+            <h1 class="profile__username">
+                {{ user.username }}
+                <span class="profile__pencil_for__edit"><img src="{% static 'img/icons/pencil-fill.svg' %}" alt="pencil" class="profile__pencil_for__edit__icon" data-bs-toggle="modal" data-bs-target="#modal_profile"></span>
+            </h1>
+            {% if user.get_full_name %}
+                <h2 class="profile__fio">{{ user.get_full_name }}</h2>
+            {% else %}
+                <h2 class="profile__fio">-</h2>
+            {% endif %}
+            <h2 class="profile__date_register">Регистрация: {{ user.date_joined|date:"d.m.Y" }}</h2>
+        </div>
+        <div class="col-md-2">
+            <div class="profile__status_wrapper">
+                {% if user.is_superuser %}
+                    <span class="badge text-bg-success status">Администратор</span>
+                {% elif user.is_moderator %}
+                    <span class="badge text-bg-info status">Модератор</span>
+                {% else %}
+                    <span class="badge text-bg-secondary status">Пользователь</span>
+                {% endif %}
+                <div class="modal fade" id="modal_profile" tabindex="-1" aria-labelledby="modal_profile" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="modal-header">
+                                    <h2 class="modal-title fs-5" id="modal_profile">Изменение профиля</h2>
+                                    <button type="button" class="btn-close modal__btn__close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="modal__profile_example">
+                                            <div class="modal__profile_example_avatar_wrapper">
+                                                <img src="{{S3_DIR_USER_IMAGES_URL}}{{user.avatar}}" alt="" class="modal__profile_example_avatar">
+                                            </div>
+                                            <div class="modal__profile_example_info">
+                                                <h3 id="modal__profile_example_username">{{ user.username }}</h3>
+                                                <h3 class="modal_profile_example_info_fio" id="modal__profile_example_fio">{{ user.get_full_name }}</h3>
+                                            </div>
+                                    </div>
+                                    <div class="border-bottom my-3 modal__profile_devider"></div>
+                                    <div class="modal__profile_form">
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    {{ form_profile_update.first_name|add_class:"form-control modal__profile_form_input"|attr:"placeholder=Имя id=modal_form_first_name" }}
+                                                    {% if form_profile_update.errors.first_name %}
+                                                        <div class="invalid_feedback">
+                                                            {{ form_profile_update.errors.first_name|join:"<br>" }}
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="col-sm">
+                                                    {{ form_profile_update.last_name|add_class:"form-control modal__profile_form_input"|attr:"placeholder=Фамилия id=modal_form_last_name" }}
+                                                    {% if form_profile_update.errors.last_name %}
+                                                        <div class="invalid_feedback">
+                                                            {{ form_profile_update.errors.last_name|join:"<br>" }}
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    {{ form_profile_update.username|add_class:"form-control modal__profile_form_input modal__profile_form_input_mt"|attr:"placeholder=Юзернейм id=modal_form_username" }}
+                                                    {% if form_profile_update.errors.username %}
+                                                        <div class="invalid_feedback">
+                                                            {{ form_profile_update.errors.username|join:"<br>" }}
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <div class="modal__profile_form_file_input">
+                                                <label for="formFileSm" class="form-label modal__profile_file_upload_label">Загрузите аватар (*формата png, jpg, jpeg) </label>
+                                                {{ form_profile_update.avatar|add_class:"form-control form-control-sm"|attr:"id=formFileSm" }}
+                                                {% if form_profile_update.errors.avatar %}
+                                                    <div class="invalid_feedback">
+                                                        {{ form_profile_update.errors.avatar|join:"<br>" }}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                            <a href="{% url 'users:password_change' %}" class="modal_password_change_link">Изменить пароль</a>
+                                    </div>
+                                </div>
+                                <div class="modal-footer modal__profile_footer">
+                                    <button type="button" class="btn btn-secondary modal__profile__button_close" data-bs-dismiss="modal">Закрыть</button>
+                                    <button type="submit" class="btn btn-primary modal__profile__button_save" name="update_profile">Сохранить</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row profile__possibilities">
+        {% if request.user.is_staff or request.user.is_moderator %}
+            <button type="button" class="mr-10 btn btn-outline-danger btn_create_book" data-bs-toggle="modal" data-bs-target="#modal_add_book">Добавить книгу</button>
+        {% endif %}
+    </div>
+    <div class="modal fade" id="modal_add_book" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modal_book_create" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modal_book_create">Добавить книгу</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body modal__add_book_form">
+                        <div class="mb-3">
+                            {{ book_create_form.title|add_class:"form-control"|attr:"placeholder=Название id=form__book_name" }}
+                            {% if book_create_form.errors.title %}
+                                <div class="invalid_feedback">
+                                    {{ book_create_form.errors.title|join:"<br>" }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="row mb-3 form__book_author_and_pub_date">
+                            <div class="col-sm mb-3">
+                                {{ book_create_form.author|add_class:"form-control"|attr:"placeholder=Автор aria-label=author" }}
+                                {% if book_create_form.errors.author %}
+                                    <div class="invalid_feedback">
+                                        {{ book_create_form.errors.author|join:"<br>" }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-sm">
+                                {{ book_create_form.publication_year|add_class:"form-control"|attr:"placeholder=Год выпуска aria-label=pub_year min=1980 max=2030" }}
+                                {% if book_create_form.errors.publication_year %}
+                                    <div class="invalid_feedback">
+                                        {{ book_create_form.errors.publication_year|join:"<br>" }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            {{ book_create_form.description|add_class:"form-control"|attr:"placeholder=Описание id=form__book_descr aria-label=descr" }}
+                            {% if book_create_form.errors.description %}
+                                <div class="invalid_feedback">
+                                    {{ book_create_form.errors.description|join:"<br>" }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="modal__profile_form_file_input">
+                            <label for="form__book_add_file_upload" class="form-label modal__add_book_file_upload_label">Загрузите обложку книги (*формата png, jpg, jpeg)</label>
+                            {{ book_create_form.image|add_class:"form-control form-control-sm"|attr:"id=form__book_add_file_upload" }}
+                            {% if book_create_form.errors.image %}
+                                <div class="invalid_feedback">
+                                    {{ book_create_form.errors.image|join:"<br>" }}
+                                </div>
+                            {% endif %}
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Закрыть</button>
+                    <button type="submit" class="btn btn-outline-danger btn_create_book" name="add_book">Создать</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+    <div class="profile_user_comments">
+                <h2 class="profile_user_comments_title">Мои комментарии</h2>
+                <div class="border-bottom my-3 modal__profile_devider"></div>
+                {% if latest_comments %}
+                    <div id="comment_carousel" class="carousel slide" data-bs-interval="false">
+                    <div class="carousel-inner profile_user_comments_carousel">
+                        {% for comment in latest_comments %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <div class="row comment_item">
+                                    <div class="col-9 col-md-3 col-sm-9 col-lg-3 comment_book_section">
+                                        <div class="comment_book_avatar_wrapper">
+                                            <img src="{{ S3_DIR_BOOK_COVERS_URL }}{{ comment.book.image }}" alt="" class="comment_book_avatar">
+                                        </div>
+                                        <div class="comment_book_title">
+                                            <a href="{% url 'books:book_detail' comment.book.id %}">{{ comment.book.title|truncate_chars:40 }}</a>
+                                        </div>
+                                    </div>
+                                    <div class="col comment_info">
+                                        <div class="row book_comment_header">
+                                            <div class="col comment_username">
+                                                {{ comment.author.username }}
+                                                <span class="comment_public_date">
+                                                    {{ comment.created_at|date:"d.m.Y" }}
+                                                </span>
+                                            </div>
+                                            <div class="col book_comment_header_right_block">
+                                                <div class="book_comment_rating__wrapper">
+                                                    <img src="{% static 'img/icons/star.svg' %}" alt="" class="book_comment_rating__icon">
+                                                    <span>{{ comment.rating }}</span>
+                                                    <div class="book_comment_recommended_status {% if comment.recommended %} recommended {% else %} not_recommended {% endif %}">
+                                                        {% if comment.recommended %}
+                                                            Рекомендует
+                                                        {% else %}
+                                                            Не рекомендует
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="book_comment_text profile_user_comment_text">
+                                             {{ comment.text | safe }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <a href="{% url 'users:profile_comments' %}" class="all_user_comments_link">Все комментарии</a>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#comment_carousel" data-bs-slide="prev">
+                      <img src="{% static 'img/icons/button_prev.png' %}" alt="">
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#comment_carousel" data-bs-slide="next">
+                        <img src="{% static 'img/icons/button_next.png' %}" alt="">
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                {% else %}
+                    <div>У вас пока нет комментариев</div>
+                {% endif %}
+                <div class="border-bottom my-3 modal__profile_devider"></div>
+    </div>
+</div>
+{% endblock %}

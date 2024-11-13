@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block head %}
+<link href="{% static 'css/feedback.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+Обратная связь
+{% endblock %}
+
+{% block content %}
+<div class="feedback_wrapper">
+    <h1 >Обратная связь</h1>
+    <form class="needs-validation feedback" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {{ form.non_field_errors|join:"<br>" }}
+            </div>
+        {% endif %}
+<!--        <select class="form-select feedback_type_select">-->
+<!--            <option value="None" class="feedback_type_select_item">Тип обращения</option>-->
+<!--            <option value="1" class="feedback_type_select_item">Предложение сотрудничества</option>-->
+<!--            <option value="2" class="feedback_type_select_item">Вопрос</option>-->
+<!--            <option value="3" class="feedback_type_select_item">Предложение по улучшению</option>-->
+<!--        </select>-->
+        {{ feedback_creation_form.theme|add_class:"form-select feedback_type_select" }}
+        {% if feedback_creation_form.theme.errors %}
+            <div class="invalid_feedback">
+                {{ feedback_creation_form.theme.errors|join:"<br>" }}
+            </div>
+        {% endif %}
+        <div class="mb-3">
+            {{ feedback_creation_form.text|add_class:"form-control bookworm_textarea feedback_textarea"|attr:"rows=8 placeholder=Текст" }}
+            {% if feedback_creation_form.text.errors %}
+                <div class="invalid_feedback">
+                    {{ feedback_creation_form.text.errors|join:"<br>" }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <label for="formFileSm" class="form-label feedback_file_upload_label">Загрузите файл (*формата png, jpg, jpeg, pdf, zip) </label>
+            {{ feedback_creation_form.file|add_class:"form-control form-control-md"|attr:"id=formFileSm type=file" }}
+            {% if feedback_creation_form.file.errors %}
+                <div class="invalid_feedback">
+                    {{ feedback_creation_form.file.errors|join:"<br>" }}
+                </div>
+            {% endif %}
+        </div>
+        {{ feedback_creation_form.captcha }}
+        {% if feedback_creation_form.captcha.errors %}
+            <div class="invalid_feedback">
+                {{ feedback_creation_form.captcha.errors|join:"<br>" }}
+            </div>
+        {% endif %}
+        <button type="submit" class="bookworm_btn feedback_btn">Отправить</button>
+    </form>
+</div>
+{% endblock %}

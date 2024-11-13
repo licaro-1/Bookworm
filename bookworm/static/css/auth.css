@@ -1,0 +1,87 @@
+/* auth */
+
+.form_auth__wrapper {
+    margin: 0 auto;
+    padding: 40px 25px 46px 25px;
+    margin-top: 150px;
+    border-radius: 12px;
+    max-width: 390px;
+    box-shadow: -4px 3px 16px 0 rgba(0, 0, 0, 0.2), 4px -3px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.form_auth__wrapper h1{
+    text-align: center;
+    margin: 0 0 40px 0;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.form_auth__input {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    max-width: 340px;
+    height: 52px;
+}
+
+.form_auth__input:focus {
+    box-shadow: none;
+    border-color: #f47349;
+}
+
+.form_auth__input_mt {
+    margin: 22px 0 0 0;
+}
+
+.form_auth__btn {
+    margin: 28px 0 0 0;
+    border: none;
+    border-radius: 6px;
+    max-width: 340px;
+    height: 46px;
+    background: #f47349;
+}
+
+.form_auth__btn:hover {
+    background: #f8845e;
+}
+
+.other-auth-method {
+    text-align: center;
+    margin: 24px 0 0 0;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.signup_link {
+    display: block;
+    color: #000;
+    margin: 12px 0 0 0;
+}
+
+.centrify_block {
+    text-align: center;
+}
+
+.notify_text {
+    font-size: 80px;
+}
+
+.profile_link {
+    margin-top: 20px
+}
+
+.center_block {
+    margin-top: 100px;
+    text-align: center;
+}
+
+.index_page_link {
+    display: block;
+}
+
+.forgot_password {
+    display: block;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 14px;
+}

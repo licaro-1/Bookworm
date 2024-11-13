@@ -1,0 +1,16 @@
+.user_comment_form_search {
+    margin-top: 60px;
+}
+
+.comments__wrapper {
+    margin-top: 52px;
+}
+
+#user_comment_item {
+    margin-top: 50px;
+    border-radius: 18px;
+}
+
+#user_comments_text {
+    word-break: break-word;
+}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Bookworm - сборник IT книг{% endblock %}
+{% block head %}
+<meta name="description" content="Bookworm - Сборник IT книг">
+<link href="{% static 'css/index.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<form class="container form__search books_form_search" method="GET">
+    <div class="input-group">
+      <input type="search"  name="q" class="form-control shadow-none form__search__input" id="search-input" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}" placeholder="Название книги" aria-label="Book name" aria-describedby="basic-addon1">
+      <span class="input-group-text" id="basic-addon1"><img src="{% static 'img/icons/search.svg' %}" alt=""></span>
+    </div>
+</form>
+<section class="container books__wrapper">
+    {% if page_obj %}
+        {% for book in page_obj %}
+            {% include 'books/includes/book.html' %}
+        {% endfor %}
+    {% else %}
+        <div class="page_obj_empty">Упс...<br>Книги потерялись, но мы уже занимаемся их поиском!</div>
+    {% endif %}
+</section>
+{% include 'includes/pagination.html' with page_obj=page_obj%}
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block head %}
+<link href="{% static 'css/feedback.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+Обратная связь - {{ feedback.uuid }}
+{% endblock %}
+
+{% block content %}
+<div class="feedback_send_success_wrapper">
+    <div class="send_success">
+        <div class="send_success_header">
+            <img src="{% static 'img/icons/check_success.svg' %}" alt="" class="check_success">
+            <h1 class="">Обращение отправлено</h1>
+        </div>
+        <div class="send_success_footer">
+          <div class="uid">Идентификатор - <span class="uid_color">{{ feedback.uuid }}</span></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% load static %}
+<div class="card mx-auto books__card">
+    <div class="card-body book__card">
+        <div class="row">
+            <div class="col-sm-3 image__column">
+                <div class="book__image__wrapper mx-auto">
+                    <img src="{{ S3_DIR_BOOK_COVERS_URL }}{{ book.image }}" class="rounded float-start book__image" alt="book_image">
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="book__info">
+                    <h5 class="card-title book__title"><a href="{% url 'books:book_detail' book.id %}" class="book__title__link">{{ book.title }}</a></h5>
+                    <p class="card-text book__descr text-wrap">
+                        {% if book.description %}
+                            {{ book.description }}
+                        {% else %}
+                            Описания пока нет
+                        {% endif %}
+                    </p>
+                    <div class="book_rating_comments_statistic">
+                        <div class="sm_font book_rating"><img src="{% static 'img/icons/black_star_fill.svg' %}" alt="rating"><span class="book_rating_value">{{ book.rating_average }}</span></div>
+                        <div class="sm_font book_comments"><img src="{% static 'img/icons/chat-fill.svg' %}" alt="comments"><span class="book_comments_value">{{ book.rating_count }}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

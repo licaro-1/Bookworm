@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %} 404 - Страница не найдена {% endblock %}
+{% block content %}
+    <div class="error_body">
+        <h1 class="error_code">404</h1>
+        <h2>Страницы с адресом {{ path }} не существует</h2>
+        <a href="{% url 'books:index' %}" class="index_page_link">На главную</a>
+    </div>
+{% endblock %}

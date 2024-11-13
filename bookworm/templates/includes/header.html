@@ -1,0 +1,23 @@
+{% load static %}
+
+<nav class="navbar shadow-sm">
+    <div class="container">
+        <a class="navbar-brand logo" href="{% url 'books:index' %}">Book<span class="logo__w">w</span>orm</a>
+        <div class="navbar_right_block">
+            {% if request.user.is_authenticated %}
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle navbar__profile_btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                   {{ request.user.username }}
+                  </button>
+                  <ul class="dropdown-menu">
+                      <li><a href="{% url 'users:profile' %}" class="dropdown-item navbar__dropdown_item">Профиль</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a href="{% url 'users:logout' %}" class="dropdown-item navbar__dropdown_item">Выйти</a></li>
+                  </ul>
+                </div>
+            {% else %}
+            <a href="{% url 'users:login' %}"><button type="button" class="btn fw-normal btn-sm btn__signup">Авторизоваться</button></a>
+            {% endif %}
+        </div>
+    </div>
+</nav>

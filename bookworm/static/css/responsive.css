@@ -1,0 +1,84 @@
+@media (max-width: 1397px) {
+    .book_comment_create_column {
+        margin: 0 auto;
+    }
+    .book_comment_public_date {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 1200px) {
+    .personal_book__wrapper {
+        margin: 60px 0 0 0;
+    }
+
+    .row_book__info {
+        justify-content: center;
+        text-align: center;
+    }
+
+    #book_comment_text, .book_comment_username {
+        text-align: left;
+    }
+
+    .personal_book__descr {
+        text-align: left;
+    }
+
+    .personal_book__info {
+        margin: 15px 0 0 0;
+    }
+
+    .book_comment_user_info {
+        margin-left: 45px;
+    }
+
+}
+
+@media (max-width: 1198px) {
+
+}
+
+
+@media (max-width: 573px) {
+    #modal_form_last_name {
+        margin: 10px 0 0 0;
+    }
+
+    #modal_form_username{
+        margin: 10px 0 0 0;
+    }
+}
+
+@media (max-width: 484px) {
+    .book_public_year {
+        display: block;
+        text-align: center;
+        margin-left: 0;
+    }
+
+    .book_comment_user_info {
+        margin-left: 50px;
+    }
+}
+
+@media (max-width: 763px) {
+    .form_rating_select {
+        margin-top: 10px;
+    }
+    .sumbit_button_column {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 776px) {
+    .send_success_header {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 379px) {
+    .book_comment_item {
+        padding: 20px 10px 20px 10px;
+    }
+}

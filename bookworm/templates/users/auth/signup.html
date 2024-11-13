@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block head %}
+<link href="{% static 'css/auth.css' %}" rel="stylesheet">
+<meta name="description" content="Вход в аккаунт Bookworm">
+{% endblock %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+<div class="form_auth__wrapper">
+    <h1>Регистрация</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {{ form.non_field_errors|join:"<br>" }}
+            </div>
+        {% endif %}
+        <div class="mb-3">
+            {{ form.email|add_class:"form-control form_auth__input"|attr:"placeholder:Почта" }}
+            {% if form.email.errors %}
+                <div class="invalid_feedback">
+                    {{ form.email.errors|join:"<br>" }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="mb-3 form_auth__input_mt">
+            {{ form.username|add_class:"form-control form_auth__input input_mt"|attr:"placeholder:Юзернейм" }}
+            {% if form.username.errors %}
+                <div class="invalid_feedback">
+                    {{ form.username.errors|join:"<br>" }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="mb-3 form_auth__input_mt">
+            {{ form.password|add_class:"form-control form_auth__input input_mt"|attr:"placeholder:Пароль" }}
+            {% if form.password.errors %}
+                <div class="invalid_feedback">
+                    {{ form.password.errors|join:"<br>" }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="mb-3 form_auth__input_mt">
+            {{ form.captcha }}
+            {% if form.captcha.errors %}
+                <div class="invalid_feedback">
+                    {{ form.captcha.errors|join:"<br>" }}
+                </div>
+            {% endif %}
+        </div>
+        <button type="submit" class="form_auth__btn w-100">Создать аккаунт</button>
+        <div class="other-auth-method">
+            <div>или</div>
+            <a href="{% url 'users:login' %}" class="signup_link">Уже есть аккаунт</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

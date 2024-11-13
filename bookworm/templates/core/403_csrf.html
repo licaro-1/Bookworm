@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %} 403 - Error {% endblock %}
+{% block content %}
+  <div class="error_body">
+      <h1 class="error_code">403</h1>
+      <h2>Custom CSRF check error</h2>
+      <a href="{% url 'books:index' %}" class="index_page_link">На главную</a>
+  </div>
+{% endblock %}

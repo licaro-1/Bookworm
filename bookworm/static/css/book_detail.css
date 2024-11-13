@@ -1,0 +1,278 @@
+/* personal book_page */
+
+.personal_book__wrapper {
+    margin: 130px 0 0 70px;
+}
+
+.personal_book__image_container {
+    max-height: 340px;
+    max-width: 280px;
+}
+
+.personal_book_image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    box-shadow: 4px -4px 8px 0 rgba(0, 0, 0, 0.1), -5px 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.personal_book__info {
+    margin-left: 30px;
+}
+
+.personal_book__title h1 {
+    font-weight: 600;
+    font-size: 28px;
+}
+
+.personal_book__author__and__public_year {
+    margin: 40px 0;
+}
+
+.book_author {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.book_public_year {
+    margin-left: 50px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+
+
+/* form comment create */
+
+
+.book_comments_devider {
+    margin-top: 40px;
+}
+
+.book_comment_create_form__wrapper {
+    margin-top: 34px;
+}
+
+.form_checkbox_recommended {
+    margin-left: 20px;
+}
+
+#form_comment_textarea {
+    letter-spacing: 0.03em;
+    height: 100px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    /* Set a transition for a smooth focus effect */
+    transition: border-color 0.2s ease;
+
+    /* Change the border color on focus */
+    &:focus {
+        border-color: #aaa;
+    }
+
+  /* Add a resize handle for easier resizing */
+  resize: vertical;
+}
+
+#form_comment_textarea:focus, #form_comment_textarea:active {
+    box-shadow: none;
+    border: rgba(244, 115, 73, 0.6) 1px solid;
+}
+
+#checkbox_form_recommended {
+    box-shadow: none;
+    border-color: #000;
+}
+
+#checkbox_form_recommended:checked {
+    background-color: #F47349;
+    border-color: #F47349;
+}
+
+.form_select_rating {
+    box-shadow: none;
+}
+
+.form_select_rating:focus {
+    box-shadow: none;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.form_rating_select_item:active {
+    background-color: #F47349;
+}
+
+.sumbit_button_column {
+    text-align: right;
+}
+
+.form_lower_section {
+    align-items: center;
+}
+
+.form_rating__select {
+    min-width: 130px;
+
+}
+
+.label_recommended_status {
+    display: block;
+    text-align: left;
+}
+
+
+.btn_book_comment_create_form {
+    width: 180px;
+    max-height: 36px;
+    background-color: #F47349;
+    border-radius: 5px;
+    border: none;
+}
+
+.btn_book_comment_create_form:hover {
+    background-color: #f8845e;
+}
+
+.btn_book_comment_create_form:focus {
+    background-color: #f8845e !important;
+    border: none;
+}
+
+.disabled-form {
+    pointer-events: none;
+    opacity: 0.8;
+    filter: blur(1px);
+}
+
+.authorization-message {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+/* book_comment */
+
+
+.book_comments_list__wrapper {
+    margin-top: 120px;
+}
+
+.book_comment_item {
+    max-width: 780px;
+    margin-top: 50px;
+    padding: 20px 20px 20px 14px;
+    border-radius: 18px;
+    box-shadow: -1px -1px 10px 0 rgba(0, 0, 0, 0.1), 2px 1px 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.book_comment_user_info {
+    margin-left: 25px;
+    padding-left: 0;
+}
+
+.book_comment_username {
+    font-weight: 400;
+}
+
+.book_comment_public_date {
+    font-weight: 300;
+    font-size: 14px;
+    margin-left: 4px;
+}
+
+.book_comment_user_avatar__wrapper {
+    width: 61px;
+    height: 61px;
+    margin-top: 9px;
+}
+
+.book_comment_user_avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.book_comment_rating__wrapper {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.book_comment_rating__icon {
+    width: 18px;
+    height: 18px;
+}
+
+.book_comment_recommended_status {
+    margin-left: 14px;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    min-width: 100px;
+    padding: 0 6px;
+    height: 20px;
+    text-align: center;
+    border-radius: 3px;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.recommended {
+    background-color: #6d93f6;
+}
+
+.not_recommended{
+    background-color: #FF3737;
+}
+
+.book_comment_text {
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0.03em;
+    margin-top: 20px;
+    word-break: break-word;
+}
+
+.editing_status {
+    text-align: right;
+    font-weight: 300;
+}
+
+.comment_menu_options {
+    margin-right: 14px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 10rem;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+}
+
+.comment_dropdown_item {
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.comment_dropdown_item:active, comment_dropdown_item:focus {
+    background-color: #F47349;
+}

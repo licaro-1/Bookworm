@@ -1,0 +1,333 @@
+/* profile_page */
+
+
+.profile__wrapper {
+    max-width: 900px;
+    margin: 140px  auto 0;
+}
+
+.profile__info_row {
+    border-radius: 10px;
+    padding: 15px 10px;
+    box-shadow: 1px -1px 2px 0 rgba(0, 0, 0, 0.1), -1px 1px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+
+.profile__img_wrapper {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.profile__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 auto;
+    box-shadow: -1px -1px 4px 0 rgba(0, 0, 0, 0.25), 1px 1px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.profile__info {
+    padding: 26px 0 0 30px;
+}
+
+.profile__username {
+    font-weight: 600;
+    font-size: 26px;
+}
+
+.profile__info:hover .profile__pencil_for__edit__icon {
+    display: inline;
+    opacity: 1;
+    transition: opacity 0.4s;
+
+}
+
+.profile__pencil_for__edit {
+    padding-left: 6px;
+}
+
+.profile__pencil_for__edit__icon {
+    height: 14px;
+    width: 14px;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.profile__pencil_for__edit__icon:hover {
+    transform: scale(1.1);
+}
+
+
+.profile__fio {
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 36px;
+}
+
+.profile__date_register {
+    font-weight: 300;
+    font-size: 20px;
+    margin-top: 30px;
+}
+
+.profile__status_wrapper {
+    padding-top: 5px;
+    text-align: right;
+    margin: 0 auto;
+}
+
+.status {
+    border-radius: 4px;
+    font-weight: 400;
+    font-size: 12px;
+}
+
+
+/* profile comments */
+
+.profile_user_comments {
+    margin-top: 140px;
+}
+
+.profile_user_comments_title {
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.profile_user_comments_wrapper {
+    max-width: 900px;
+    border-radius: 10px;
+    stroke-width: 1px;
+    stroke: rgba(0, 0, 0, 0);
+    box-shadow: 1px 0 4px 0 rgba(0, 0, 0, 0.25), 0 1px 4px 0 rgba(0, 0, 0, 0.25);
+    padding: 40px 10px;
+}
+
+
+.profile_user_comments_carousel {
+    min-height: 260px;
+}
+
+.profile_user_comment_text {
+    overflow: hidden;
+    max-height: 300px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+}
+
+/* button add book */
+
+.profile__possibilities {
+    margin-top: 10px;
+    justify-content: right;
+}
+
+.btn_create_book {
+    color:#f47349;
+    border: #f47349 1px solid;
+    max-width: 150px;
+}
+
+.btn_create_book:hover,
+.btn_create_book:active,
+.btn_create_book:focus {
+    color:#fff;
+    background-color: #f47349 !important;
+    border: #f47349 1px solid !important;
+}
+
+#modal_book_create {
+    font-size: 14px;
+}
+
+.modal__add_book_form {
+    padding: 40px;
+}
+
+.form__book_author_and_pub_date {
+    margin-top: 20px;
+}
+
+.modal__add_book_form input:hover,
+.modal__add_book_form input:active,
+.modal__add_book_form input:focus,
+.modal__add_book_form textarea:hover,
+.modal__add_book_form textarea:focus  {
+    box-shadow: none;
+    border: 1px #f47349 solid;
+}
+
+
+
+#form__book_add_file_upload {
+    max-width: 300px;
+}
+
+
+.modal__add_book_file_upload_label {
+    font-size: 13px;
+}
+
+/* profile modal */
+
+
+.modal_title {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.modal__btn__close:focus {
+    box-shadow: none;
+}
+
+.modal__profile_example {
+    display: flex;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.modal__profile_example_avatar_wrapper {
+    width: 126px;
+    height: 126px;
+    border-radius: 100%;
+}
+
+.modal__profile_example_avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 100%;
+    box-shadow: -1px -1px 4px 0 rgba(0, 0, 0, 0.25), 1px 1px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.modal__profile_example_info{
+    text-align: left;
+    padding: 27px 0 0 15px;
+}
+
+.modal__profile_example_info h3{
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.modal_profile_example_info_fio {
+    margin-top: 15px;
+}
+
+.modal__profile_devider {
+    margin-top: 26px;
+}
+
+.modal__profile_form {
+    max-width: 300px;
+    margin: 26px auto 0;
+}
+
+.modal__profile_form_input:focus {
+    box-shadow: none;
+}
+
+
+.modal__profile_form_input_mt {
+    margin-top: 38px;
+}
+
+.modal__profile_form_file_input {
+    margin-top: 20px;
+}
+
+.modal__profile_file_upload_label {
+    font-size: 14px;
+}
+
+.modal_password_change_link {
+    margin-top: 20px;
+    display: block;
+    text-align: center;
+    font-size: 13px;
+}
+
+.modal__profile_footer {
+    margin-top: 20px;
+}
+
+.modal__profile__button_close {
+    border: none;
+    border-radius: 4px;
+    width: 90px;
+    height: 40px;
+    background: #f47349;
+    color: #000;
+    font-weight: 400;
+    font-size: 14px;
+    color: #000;
+}
+
+.modal__profile__button_close:hover {
+    background: #f8845e;
+    box-shadow: none;
+    color: #000;
+}
+
+.modal__profile__button_close:focus, .modal__profile__button_close:active {
+    background: #f8845e !important;
+    color: #000 !important;
+    box-shadow: none;
+}
+
+.modal__profile__button_save {
+    width: 100px;
+    height: 40px;
+    font-weight: 400;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    background: none;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #000;
+}
+
+.modal__profile__button_save:hover {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    background: #000;
+    color: #fff;
+}
+
+.modal__profile__button_save:active, .modal__profile__button_save:focus {
+    border: 1px solid rgba(0, 0, 0, 0.5) !important;
+    background: #000 !important;
+    color: #fff !important;
+    box-shadow: none;
+}
+
+
+#comment_carousel {
+    margin-top: 80px;
+    position: relative;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    position: absolute;
+    top: 100px;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.carousel-control-prev {
+    left: 0;
+}
+
+.carousel-control-next {
+    right: 0;
+}
+
+
+.all_user_comments_link {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+}

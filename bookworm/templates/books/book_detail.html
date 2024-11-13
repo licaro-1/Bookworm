@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block head %}
+<link href="{% static 'css/book_detail.css' %}" rel="stylesheet">
+<script src="{% static 'tinymce/tinymce.min.js' %}"></script>
+{% endblock %}
+
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block content %}
+<div class="personal_book__wrapper">
+    <div class="row row_book__info">
+        <div class="col-sm-4 personal_book__image_container">
+            <img src="{{ S3_DIR_BOOK_COVERS_URL }}{{ book.image }}" alt="Book image" class="img-fluid personal_book_image">
+        </div>
+        <div class="col-sm-8 personal_book__info">
+            <div class="personal_book__title"><h1>{{ book.title }}</h1></div>
+            <div class="personal_book__author__and__public_year">
+                <span class="book_author">Автор: {% if book.author %} {{ book.author }} {% else %} Неизвестно {% endif %}</span>
+                <span class="book_public_year">Год выпуска: {% if book.publication_year %} {{ book.publication_year }} {% else %} Неизвестно {% endif %}</span>
+            </div>
+            <div class="personal_book__descr">
+                {% if book.description %}
+                    {{ book.description }}
+                {% else %}
+                    Описания пока нет
+                {% endif %}
+            </div>
+        </div>
+
+            <div class="row row_book__comments">
+                <div class="col-md-3"></div>
+                <div class="col-md-8 book_comment_create_column">
+                    <div class="border-bottom book_comments_devider">Всего комментариев: {{ book.rating_count }}</div>
+                    <div class="book_comment_create_form__wrapper {% if not request.user.is_authenticated %} disabled-form {% endif %}">
+                        <form method="POST">
+                            {% csrf_token %}
+                            {% if comment_create_form.non_field_errors %}
+                                <div class="alert alert-danger">
+                                        {{ comment_create_form.non_field_errors|join:", " }}
+                                </div>
+                            {% endif %}
+                            <div class="mb-3">
+                                {{ comment_create_form.text|add_class:"form-control"|attr:"placeholder=Комментарий id=form_comment_textarea minlength=80" }}
+                                {% if comment_create_form.text.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ comment_create_form.text.errors|join:", " }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="row form_lower_section">
+                                <div class="col-lg-2 col-xs-3 form-check form_checkbox_recommended">
+                                    {{ comment_create_form.recommended|add_class:"form-check-input"|attr:"id=checkbox_form_recommended" }}
+                                    <label class="form-check-label label_recommended_status" for="checkbox_form_recommended">Рекомендую</label>
+                                </div>
+                                <div class="col-md-4 form_rating_select">
+                                    {{ comment_create_form.rating|add_class:"form-select form_select_rating"|attr:"aria-label=rating select" }}
+                                </div>
+                                <div class="col sumbit_button_column">
+                                    {% if comment_id %}
+                                        <button type="submit" class="btn btn_book_comment_create_form">Сохранить</button>
+                                    {% else %}
+                                        <button type="submit" class="btn btn_book_comment_create_form">Создать</button>
+                                    {% endif %}
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                    {% if not request.user.is_authenticated %}
+                    <div class="authorization-message">
+                        Авторизуйтесь, чтобы оставить комментарий
+                    </div>
+                    {% endif %}
+                    <div class="book_comments_list__wrapper">
+                        {% for comment in book_comments_page_obj %}
+
+                        <div class="book_comment_item">
+                            <div class="row" id="comment-{{ comment.id }}">
+                                <div class="col-1">
+                                    <div class="book_comment_user_avatar__wrapper">
+                                        <img src="{{S3_DIR_USER_IMAGES_URL}}{{comment.author.avatar}}" alt="" class="book_comment_user_avatar">
+                                    </div>
+                                </div>
+                                <div class="col book_comment_user_info">
+                                    <div class="row book_comment_header">
+                                        <div class="col-3 book_comment_username">
+                                            {{ comment.author.username }}
+                                            <span class="book_comment_public_date">
+                                                {{ comment.created_at|date:"d.m.Y" }}
+                                            </span>
+                                        </div>
+                                        <div class="col book_comment_header_right_block">
+                                            <div class="book_comment_rating__wrapper">
+                                                <span class="comment_menu_options_wrapper" data-bs-toggle="dropdown" aria-expanded="false" data-bs-popper="none">
+                                                    <img src="{% static 'img/icons/menu_horizontal.svg' %}" alt="" class="comment_menu_options">
+                                                </span>
+                                                <ul class="dropdown-menu">
+                                                    <!-- Выпадающее менею комментария -->
+                                                    <li><span class="dropdown-item comment_dropdown_item" id="copy-link" data-link="{{ request.build_absolute_uri }}#comment-{{ comment.id }}">Скопировать ссылку</span></li>
+                                                    {% if request.user == comment.author %}
+                                                    <li><a class="dropdown-item comment_dropdown_item" data-comment-id="{{ comment.id }}" href="{% url 'books:book_detail' book.id %}?comment_id={{ comment.id }}">Редактировать</a></li>
+                                                    <form class="delete-comment-form" action="{% url 'books:book_comment_delete' comment.id %}" method="POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                                                        <button class="dropdown-item comment_dropdown_item delete_comment" type="submit">Удалить</button>
+                                                    </form>
+                                                    {% endif %}
+                                                </ul>
+                                                <img src="{% static 'img/icons/star.svg' %}" alt="" class="book_comment_rating__icon">
+                                                <span>{{ comment.rating }}</span>
+
+                                                <div class="book_comment_recommended_status {% if comment.recommended %} recommended {% else %} not_recommended {% endif %}">
+                                                    {% if comment.recommended %}
+                                                        Рекомендует
+                                                    {% else %}
+                                                        Не рекомендует
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="book_comment_text" id="book_comment_text">
+                                        {{ comment.text | safe }}
+                                    </div>
+                                    {% if comment.is_edited %}
+                                        <div class="book_comment_public_date editing_status">
+                                            Изменено: {{ comment.updated_at|date:"d.m.Y" }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% include 'includes/pagination.html' with page_obj=book_comments_page_obj %}
+                    </div>
+
+                </div>
+            </div>
+    </div>
+</div>
+<script>
+    tinymce.init({
+        selector: '#id_text',
+        height: 300,
+        menubar: false,
+        plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount',
+        toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+        language: 'ru',
+        branding: false
+});
+</script>
+{% endblock %}

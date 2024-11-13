@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %}Мои комментарии - Bookworm{% endblock %}
+
+{% block head %}
+<link href="{% static 'css/book_detail.css' %}" rel="stylesheet">
+<link href="{% static 'css/profile.css' %}" rel="stylesheet">
+<link href="{% static 'css/comments.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<form class="container form__search user_comment_form_search">
+    <div class="input-group">
+      <input type="text" name="q" class="form-control shadow-none form__search__input" placeholder="Текст комментария или название книги" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}" aria-label="Comment Search" aria-describedby="basic-addon1">
+      <span class="input-group-text" id="basic-addon1"><img src="{% static 'img/icons/search.svg' %}" alt=""></span>
+    </div>
+</form>
+<section class="container comments__wrapper">
+    {% for comment in page_obj %}
+    <div class="row comment_item" id="user_comment_item">
+        <div class="col-9 col-md-3 col-sm-9 col-lg-3 comment_book_section">
+            <div class="comment_book_avatar_wrapper">
+                <img src="{{ S3_DIR_BOOK_COVERS_URL }}{{ comment.book.image }}" alt="" class="comment_book_avatar">
+            </div>
+            <div class="comment_book_title">
+                <a href="{% url 'books:book_detail' comment.book.id %}">{{ comment.book.title }}</a>
+            </div>
+        </div>
+        <div class="col comment_info">
+            <div class="row book_comment_header">
+                <div class="col comment_username">
+                    {{ comment.author.username }}
+                    <span class="comment_public_date">
+                        {{ comment.created_at|date:"d.m.Y" }}
+                    </span>
+                </div>
+                <div class="col book_comment_header_right_block">
+                    <div class="book_comment_rating__wrapper">
+                        <span class="comment_menu_options_wrapper" data-bs-toggle="dropdown" aria-expanded="false" data-bs-popper="none">
+                            <img src="{% static 'img/icons/menu_horizontal.svg' %}" alt="" class="comment_menu_options">
+                        </span>
+                        <ul class="dropdown-menu">
+                            <!-- Выпадающее менею комментария -->
+                            <li><a class="dropdown-item comment_dropdown_item" href="{% url 'books:book_detail' comment.book.id %}?comment_id={{ comment.id }}">Редактировать</a></li>
+                            <form class="delete-comment-form" action="{% url 'books:book_comment_delete' comment.id %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                                <button class="dropdown-item comment_dropdown_item delete_comment" type="submit">Удалить</button>
+                            </form>
+                        </ul>
+                        <img src="{% static 'img/icons/star.svg' %}" alt="" class="book_comment_rating__icon">
+                        <span>{{ comment.rating }}</span>
+                        <div class="book_comment_recommended_status {% if comment.recommended %} recommended {% else %} not_recommended {% endif %}">
+                            {% if comment.recommended %}
+                                Рекомендует
+                            {% else %}
+                                Не рекомендует
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="book_comment_text">
+                {{ comment.text | safe }}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
+{% include 'includes/pagination.html' with page_obj=page_obj %}
+{% endblock %}
