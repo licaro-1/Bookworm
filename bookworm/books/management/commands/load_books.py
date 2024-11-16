@@ -38,6 +38,13 @@ class Command(BaseCommand):
                 book_title = strip_if_exists(book.get("title"))
                 book_author = strip_if_exists(book.get("author"))
                 book_description = strip_if_exists(book.get("description"))
+                if book_description and len(book_description) > 4000:
+                    self.stdout.write(
+                        f"Book with title {book_title} have len "
+                        f"description great then 4000, and will "
+                        f"not save to database"
+                    )
+                    continue
                 book_public_date = book.get("public_date")
                 book_image = book.get("image_url")
                 if not book_title or not book_image or self.book_repository.get_book_by_title(book_title):

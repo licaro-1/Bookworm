@@ -40,7 +40,7 @@ class Book(models.Model):
         verbose_name="Год публикации",
     )
     description = models.CharField(
-        max_length=3000,
+        max_length=4000,
         blank=True,
         null=True,
         verbose_name="Описание",
