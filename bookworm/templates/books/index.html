@@ -21,7 +21,11 @@
             {% include 'books/includes/book.html' %}
         {% endfor %}
     {% else %}
-        <div class="page_obj_empty">Упс...<br>Книги потерялись, но мы уже занимаемся их поиском!</div>
+        {% if request.GET.q %}
+            <div class="page_obj_empty">Не нашли книг по запросу "{{ request.GET.q }}"</div>
+        {% else %}
+            <div class="page_obj_empty">Упс...<br>Книги потерялись, но мы уже занимаемся их поиском!</div>
+        {% endif %}
     {% endif %}
 </section>
 {% include 'includes/pagination.html' with page_obj=page_obj%}
