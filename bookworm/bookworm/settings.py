@@ -44,6 +44,11 @@ ALLOWED_HOSTS = [
     'bookworm-books.ru,'
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://bookworm-books.ru',
+    'http://bookworm-books.ru',
+]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -99,6 +104,7 @@ WSGI_APPLICATION = "bookworm.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# Use for prod
 DATABASES = {
     "default": {
         "ENGINE": os.getenv("DB_ENGINE", default="django.db.backends.postgresql"),
@@ -110,6 +116,7 @@ DATABASES = {
     }
 }
 
+# Use for tests
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',

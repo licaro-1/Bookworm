@@ -47,6 +47,8 @@
    python .\bookworm\manage.py test .\bookworm
    ```
 
+7. Создать файл nginx.prod.conf в директории infra/nginx и заполнить необходимой информацией
+
 7. Поднять docker контейнеры
 ```bash
 

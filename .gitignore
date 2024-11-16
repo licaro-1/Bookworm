@@ -143,7 +143,7 @@ dmypy.json
 # Local History for Visual Studio Code
 .history/
 .sqlite3
-bookwormdb.sqlite3
+
 
 .mypy_cache
 
@@ -157,6 +157,9 @@ htmlcov/
 .coverage.*
 .coverage.xml
 *.cover
+
 infra/.env
 !infra/.env-example
 *.env
+bookwormdb.sqlite3
+infra/nginx/nginx.prod.conf
