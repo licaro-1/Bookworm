@@ -36,7 +36,7 @@ jobs:
           POSTGRES_USER: bookworm_user
           POSTGRES_PASSWORD: bookworm_password
           POSTGRES_DB: bookworm_db
-          DB_HOST: 127.0.0.1:5432
+          DB_HOST: 127.0.0.1
           DB_PORT: 5432
           DJANGO_SECRET: '23123123secret-key'
           S3_HOST_URL: 'https://b136-3d624fd5227f.selstorage.ru/'
