@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from bookworm.admin import bookworm_admin_site
 from books.models import Book, Comment
+from bookworm.admin import bookworm_admin_site
 
 
 class BookAdmin(admin.ModelAdmin):

@@ -1,7 +1,6 @@
 from django import forms
 from django_recaptcha.fields import ReCaptchaField
 
-
 from feedback.models import Feedback
 
 

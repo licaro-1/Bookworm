@@ -28,7 +28,8 @@ class BookModelTest(TestCase):
         for field, expected_value in field_verboses.items():
             with self.subTest(field=field):
                 self.assertEqual(
-                    self.book._meta.get_field(field).verbose_name, expected_value
+                    self.book._meta.get_field(field).verbose_name,
+                    expected_value
                 )
 
     def test_model_have_correct_object_name(self):

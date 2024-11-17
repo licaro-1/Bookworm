@@ -1,8 +1,6 @@
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import include, path
 
 from bookworm.admin import bookworm_admin_site
-
 
 handler404 = "core.views.page_not_found"
 handler403 = "core.views.csrf_failure"

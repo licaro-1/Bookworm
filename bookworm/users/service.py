@@ -4,7 +4,6 @@ from django.contrib.auth import get_user_model
 
 from .repository import user_repository
 
-
 User = get_user_model()
 
 

@@ -16,7 +16,11 @@ class UserRepository:
 
     def create_user(self, username: str, email: str, password: str) -> User:
         """Create user and return obj."""
-        return User.objects.create_user(username=username, email=email, password=password)
+        return User.objects.create_user(
+            username=username,
+            email=email,
+            password=password
+        )
 
     def update_user(self, user: User, **kwargs) -> User:
         """Partial update user."""

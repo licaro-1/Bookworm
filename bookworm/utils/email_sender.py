@@ -1,8 +1,6 @@
 from django.core.mail import EmailMessage
 
-from bookworm.settings import (
-    EMAIL_HOST_USER
-)
+from bookworm.settings import EMAIL_HOST_USER
 from logger.log import logger
 
 
@@ -14,7 +12,7 @@ def send_single_email(
         send_from: str = EMAIL_HOST_USER,
 ) -> bool:
     """Email send handler."""
-    logger.info(f"Received a request to send a email")
+    logger.info("Received a request to send a email")
     logger.info(
         f"Received data:"
         f"{subject=}"

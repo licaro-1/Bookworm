@@ -2,14 +2,13 @@ from http import HTTPStatus
 
 from django.contrib.auth import get_user_model
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.test import TestCase, Client
+from django.test import Client, TestCase
 from django.urls import reverse
 
+from books.models import Book, Comment
 from bookworm.settings import S3_DIR_BOOK_COVERS
-from books.models import Comment, Book
-from utils.context_checker import comment_context_checker
 from s3.client import bookworm_s3_client
-
+from utils.context_checker import comment_context_checker
 
 User = get_user_model()
 
@@ -33,7 +32,7 @@ class CommentCreateFormTest(TestCase):
         cls.comment_for_update = Comment.objects.create(
             book=cls.book,
             author=cls.user,
-            text=f"Test Comment",
+            text="Test Comment",
             rating=2,
             recommended=True
         )
@@ -171,6 +170,12 @@ class BookCreateFormTest(TestCase):
             },
             follow=True
         )
-        self.assertTrue(Book.objects.filter(title=form_data.get("title")).exists())
+        self.assertTrue(
+            Book.objects.filter(title=form_data.get("title"))
+            .exists()
+        )
         book = Book.objects.get(title=form_data.get("title"))
-        self.assertRedirects(response, reverse("books:book_detail", kwargs={"id": book.id}))
+        self.assertRedirects(
+            response,
+            reverse("books:book_detail", kwargs={"id": book.id})
+        )

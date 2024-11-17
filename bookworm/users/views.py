@@ -1,20 +1,16 @@
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from django.views.generic import CreateView
 from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-
-from bookworm.settings import (
-    S3_DIR_USER_IMAGES_URL,
-    S3_DIR_BOOK_COVERS_URL
-)
+from django.views.generic import CreateView
 
 from books.forms import BookCreateForm
-from users.forms import CreationForm, CustomLoginForm, UserUpdateForm
 from books.service import comment_service
-from utils.pagination import paginator
+from bookworm.settings import S3_DIR_BOOK_COVERS_URL, S3_DIR_USER_IMAGES_URL
 from logger.log import logger
+from users.forms import CreationForm, CustomLoginForm, UserUpdateForm
+from utils.pagination import paginator
 
 
 class SignUp(CreateView):
@@ -53,7 +49,7 @@ def profile(request):
             )
             if profile_form.is_valid():
                 profile_form.save()
-                logger.info(f"Profile updated successfully")
+                logger.info("Profile updated successfully")
                 return redirect(reverse_lazy("users:profile"))
         elif "add_book" in request.POST:
             logger.info(f"Start creating book by {request.user} "
@@ -71,7 +67,10 @@ def profile(request):
                     )
                 )
             else:
-                logger.info(f"Error creating book, form is not valid, data={request.POST}")
+                logger.info(
+                    f"Error creating book, "
+                    f"form is not valid, data={request.POST}"
+                )
                 book_create_form = BookCreateForm(request.POST, request.FILES)
     latest_comments = comment_service.get_latest_comments(
         latest_count=20,
@@ -96,7 +95,10 @@ def profile_comments(request):
     """
     q = request.GET.get("q")
     if q:
-        user_comments = comment_service.search_comments(author=request.user, q=q)
+        user_comments = comment_service.search_comments(
+            author=request.user,
+            q=q
+        )
     else:
         user_comments = comment_service.comments_by_user(user=request.user)
     page_obj = paginator(request, user_comments)

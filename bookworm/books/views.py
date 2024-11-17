@@ -1,17 +1,13 @@
-from django.shortcuts import render, redirect
 from django.http import Http404, HttpResponseForbidden
+from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
 from django.views.decorators.http import require_http_methods
 
-from django.urls import reverse_lazy
-
-from bookworm.settings import (
-    S3_DIR_BOOK_COVERS_URL,
-    S3_DIR_USER_IMAGES_URL
-)
-from utils.pagination import paginator
-from logger.log import logger
 from books.forms import CommentCreateForm
 from books.service import book_service, comment_service
+from bookworm.settings import S3_DIR_BOOK_COVERS_URL, S3_DIR_USER_IMAGES_URL
+from logger.log import logger
+from utils.pagination import paginator
 
 
 def index(request):
@@ -44,18 +40,18 @@ def personal_book(request, id: int):
         raise Http404()
     comment_create_form = CommentCreateForm()
     # if comment_id -> set instance to comment form
-    comment_id = request.GET.get("comment_id") or request.POST.get("comment_id")
+    comment_id = (
+        request.GET.get("comment_id")
+        or request.POST.get("comment_id")
+    )
     comment_to_edit = None
     if comment_id:
-        comment_to_edit = comment_service.get_comment_by_id (comment_id)
+        comment_to_edit = comment_service.get_comment_by_id(comment_id)
         if not comment_to_edit:
             raise Http404()
     if (
-            comment_to_edit
-            and
-            request.user.is_authenticated
-            and
-            comment_to_edit.author == request.user
+            comment_to_edit and request.user.is_authenticated
+            and comment_to_edit.author == request.user
     ):
         comment_create_form = CommentCreateForm(instance=comment_to_edit)
     if request.method == "POST":
@@ -69,13 +65,15 @@ def personal_book(request, id: int):
                 request.POST,
                 instance=comment_to_edit
             )
-            logger.info(f"Start updating comment "
-                        f"with data {comment_to_edit.id}"
+            logger.info(
+                f"Start updating comment "
+                f"with data {comment_to_edit.id}"
             )
         else:
             comment_create_form = CommentCreateForm(request.POST)
-            logger.info(f"Start creating comment "
-                        f"by {request.user}"
+            logger.info(
+                f"Start creating comment "
+                f"by {request.user}"
             )
         if comment_create_form.is_valid():
             comment = comment_create_form.save(commit=False)
@@ -90,7 +88,9 @@ def personal_book(request, id: int):
                 logger.info(f"Success comment update, data={comment!r}")
             else:
                 logger.info(f"Success comment create, data={comment!r}")
-            return redirect(reverse_lazy("books:book_detail", kwargs={'id': id}))
+            return redirect(
+                reverse_lazy("books:book_detail", kwargs={'id': id})
+            )
     book_comments = paginator(request, book.comments.all())
     context = {
         "book": book,

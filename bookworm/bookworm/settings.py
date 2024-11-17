@@ -2,11 +2,9 @@ import os
 
 from dotenv import load_dotenv
 
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 env_path = os.path.join(os.path.dirname(BASE_DIR), "infra", ".env")
-
 
 load_dotenv(env_path)
 
@@ -41,13 +39,15 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     '[::1]',
     'testserver',
-    'bookworm-books.ru,'
+    'bookworm-books.ru',
+    'www.bookworm-books.ru',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://bookworm-books.ru',
     'http://bookworm-books.ru',
 ]
+
 
 # Application definition
 
@@ -98,8 +98,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "bookworm.wsgi.application"
-
-
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -164,11 +162,11 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-# comment if use without docker
+# comment if use with docker
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-# comment if use docker
-#STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+# comment if use without docker
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 LOGIN_URL = "users:login"
 

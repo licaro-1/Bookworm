@@ -1,7 +1,7 @@
 from http import HTTPStatus
 
-from django.test import TestCase, Client
 from django.contrib.auth import get_user_model
+from django.test import Client, TestCase
 from django.urls import reverse
 
 from feedback.models import Feedback
@@ -21,7 +21,7 @@ class FeedbackURLTests(TestCase):
         cls.feedback = Feedback.objects.create(
             author=cls.user,
             theme="suggestion",
-            text="Test Text"*10,
+            text="Test Text" * 10,
         )
         cls.template = {
             "feedback_create": "feedback/feedback_form.html",

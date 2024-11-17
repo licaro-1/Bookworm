@@ -2,13 +2,12 @@ from unittest.mock import patch
 
 from django.contrib.auth import get_user_model
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.test import Client, TestCase
 from django.urls import reverse
-from django.test import TestCase, Client
 
 from bookworm.settings import S3_DIR_USER_IMAGES
 from s3.client import bookworm_s3_client
 from users.forms import CreationForm
-
 
 User = get_user_model()
 
@@ -67,7 +66,6 @@ class UserUpdateFormTest(TestCase):
         self.authorized_client = Client()
         self.authorized_client.force_login(self.user)
 
-
     def test_user_update(self):
         jpeg_bytes = (
             b'\xFF\xD8\xFF\xE0\x00\x10\x4A\x46'
@@ -121,4 +119,3 @@ class UserUpdateFormTest(TestCase):
                 avatar=form_data["avatar"]
             ).exists()
         )
-

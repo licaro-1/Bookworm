@@ -2,10 +2,10 @@ from django import forms
 from tinymce.widgets import TinyMCE
 
 from bookworm.settings import S3_DIR_BOOK_COVERS
-from utils.form_validation import validate_image
-from s3.client import bookworm_s3_client
 from books.models import Book, Comment
 from books.service import book_service
+from s3.client import bookworm_s3_client
+from utils.form_validation import validate_image
 
 
 class BookCreateForm(forms.ModelForm):

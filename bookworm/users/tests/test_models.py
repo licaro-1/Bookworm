@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-
 User = get_user_model()
 
 
@@ -32,7 +31,8 @@ class UserModelTest(TestCase):
         for field, expected_value in field_verboses.items():
             with self.subTest(field=field):
                 self.assertEqual(
-                    self.user._meta.get_field(field).verbose_name, expected_value
+                    self.user._meta.get_field(field).verbose_name,
+                    expected_value
                 )
 
     def test_model_have_correct_object_name(self):

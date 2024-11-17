@@ -1,11 +1,10 @@
 from unittest.mock import patch
 
-from django.test import TestCase, Client
-from django.urls import reverse
 from django.contrib.auth import get_user_model
+from django.test import Client, TestCase
+from django.urls import reverse
 
 from feedback.models import Feedback
-
 
 User = get_user_model()
 
@@ -44,15 +43,15 @@ class FeedbackCreationFormTest(TestCase):
             follow=True
         )
         self.assertTrue(Feedback.objects.filter(
-                author=self.user,
-                theme=form_data["theme"],
-                text=form_data["text"]
-            ).exists()
+            author=self.user,
+            theme=form_data["theme"],
+            text=form_data["text"]
+        ).exists()
         )
         feedback = Feedback.objects.filter(
-                author=self.user,
-                theme=form_data["theme"],
-                text=form_data["text"]
+            author=self.user,
+            theme=form_data["theme"],
+            text=form_data["text"]
         ).first()
         self.assertRedirects(
             response,

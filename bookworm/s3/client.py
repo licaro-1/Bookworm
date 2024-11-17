@@ -1,13 +1,10 @@
 import io
 import uuid
-import urllib3
 
+import urllib3
 from botocore.session import get_session
 
-from bookworm.settings import (
-    S3_ACCESS_KEY,
-    S3_SECRET_KEY
-)
+from bookworm.settings import S3_ACCESS_KEY, S3_SECRET_KEY
 from logger.log import logger
 
 
@@ -96,7 +93,10 @@ class S3Client:
         key = f"{folder}/{file_name}"
         try:
             client.delete_object(Bucket=self.bucket_name, Key=key)
-            logger.info(f"File {file_name} deleted from {self.bucket_name}, folder-{folder}")
+            logger.info(
+                f"File {file_name} deleted from "
+                f"{self.bucket_name}, folder-{folder}"
+            )
         except Exception as er:
             logger.warning(f"Error deleting file {file_name=}: {er}")
 

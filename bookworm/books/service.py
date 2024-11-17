@@ -2,10 +2,9 @@ from typing import Optional
 
 from django.contrib.auth import get_user_model
 
-from logger.log import logger
-from books.repository import book_repository, comment_repository
 from books.models import Book, Comment
-
+from books.repository import book_repository, comment_repository
+from logger.log import logger
 
 User = get_user_model()
 

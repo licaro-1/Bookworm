@@ -1,9 +1,9 @@
 from typing import Optional
-from django.db.models import Q
+
 from django.contrib.auth import get_user_model
+from django.db.models import Q
 
 from books.models import Book, Comment
-
 
 User = get_user_model()
 
@@ -11,7 +11,7 @@ User = get_user_model()
 class BookRepository:
     """Book repository."""
 
-    def get_book_by_id(self, book_id:int):
+    def get_book_by_id(self, book_id: int):
         """Get book by id."""
         return Book.objects.filter(id=book_id).first()
 
@@ -31,11 +31,8 @@ class BookRepository:
     def search_books(self, q: str):
         """Search books by title, description or author."""
         books = Book.objects.filter(
-            Q(title__icontains=q)
-            |
-            Q(description__icontains=q)
-            |
-            Q(author__icontains=q)
+            Q(title__icontains=q) | Q(description__icontains=q)
+            | Q(author__icontains=q)
         )
         return books
 
@@ -97,9 +94,7 @@ class CommentRepositoy:
     def search_comments(self, q: str, author: User = None):
         """Search comments by text or book_title"""
         comments = Comment.objects.filter(
-            Q(text__icontains=q)
-            |
-            Q(book__title__icontains=q)
+            Q(text__icontains=q) | Q(book__title__icontains=q)
         )
         if author:
             comments = comments.filter(author=author)

@@ -1,11 +1,10 @@
-from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
+from django.shortcuts import redirect, render
 
 from bookworm.settings import EMAIL_FEEDBACK_RECIPIENT
 from feedback.forms import FeedbackCreationForm
 from feedback.service import feedback_service
-from feedback.models import Feedback
 from logger.log import logger
 from utils.email_sender import send_single_email
 
@@ -14,7 +13,7 @@ from utils.email_sender import send_single_email
 def feedback_create(request):
     creation_form = FeedbackCreationForm(author=request.user)
     if request.method == "POST":
-        logger.info(f"Received request for creating feedback")
+        logger.info("Received request for creating feedback")
         logger.info(f"Received POST data: {request.POST}")
         creation_form = FeedbackCreationForm(
             request.POST,
@@ -22,7 +21,7 @@ def feedback_create(request):
             author=request.user
         )
         if creation_form.is_valid():
-            logger.info(f"Feedback form is valid, start creating feedback")
+            logger.info("Feedback form is valid, start creating feedback")
             feedback = creation_form.save()
             logger.info(f"Feedback created, {feedback=}")
             subject = (feedback.get_theme_display()

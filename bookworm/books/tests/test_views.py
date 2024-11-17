@@ -1,21 +1,12 @@
-from http import HTTPStatus
-
 from django.contrib.auth import get_user_model
-from django.test import TestCase, Client
+from django.test import Client, TestCase
 from django.urls import reverse
 
-from bookworm.settings import (
-    PAGINATION_OBJ_PER_PAGE,
-    S3_DIR_BOOK_COVERS_URL,
-    S3_DIR_USER_IMAGES_URL
-)
-from books.models import Book, Comment
 from books.forms import CommentCreateForm
-from utils.context_checker import (
-    book_context_checker,
-    comment_context_checker
-)
-
+from books.models import Book, Comment
+from bookworm.settings import (PAGINATION_OBJ_PER_PAGE, S3_DIR_BOOK_COVERS_URL,
+                               S3_DIR_USER_IMAGES_URL)
+from utils.context_checker import book_context_checker, comment_context_checker
 
 User = get_user_model()
 
@@ -40,7 +31,7 @@ class BookPagesTest(TestCase):
         cls.comment = Comment.objects.create(
             book=cls.book,
             author=cls.user,
-            text=f"Test Comment",
+            text="Test Comment",
             rating=2,
             recommended=True
         )

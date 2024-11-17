@@ -1,16 +1,12 @@
 from http import HTTPStatus
 
 from django.contrib.auth import get_user_model
+from django.test import Client, TestCase
 from django.urls import reverse
-from django.test import TestCase, Client
 
 from books.models import Book, Comment
+from bookworm.settings import S3_DIR_BOOK_COVERS_URL, S3_DIR_USER_IMAGES_URL
 from utils.context_checker import comment_context_checker
-from bookworm.settings import (
-    S3_DIR_USER_IMAGES_URL,
-    S3_DIR_BOOK_COVERS_URL
-)
-
 
 User = get_user_model()
 

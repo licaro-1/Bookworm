@@ -1,17 +1,13 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import AuthenticationForm
 from django_recaptcha.fields import ReCaptchaField
 
-from bookworm.settings import (
-    S3_DIR_USER_IMAGES,
-    DEFAULT_USER_AVATAR_IMG
-)
-from utils.form_validation import validate_image
-from s3.client import bookworm_s3_client
+from bookworm.settings import DEFAULT_USER_AVATAR_IMG, S3_DIR_USER_IMAGES
 from logger.log import logger
+from s3.client import bookworm_s3_client
 from users.service import user_service
-
+from utils.form_validation import validate_image
 
 User = get_user_model()
 
@@ -81,11 +77,8 @@ class UserUpdateForm(forms.ModelForm):
 
     def clean_username(self):
         username = self.cleaned_data["username"].strip()
-        if (
-                username != self.instance.username.strip()
-                and
-                user_service.check_user_exists_by_username(username)
-        ):
+        if username != self.instance.username.strip() and \
+                user_service.check_user_exists_by_username(username):
             raise forms.ValidationError(f"Юзернейм {username} уже занят")
         return username
 
