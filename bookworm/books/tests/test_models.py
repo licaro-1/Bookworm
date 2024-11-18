@@ -5,9 +5,8 @@ from books.models import Book
 
 class BookModelTest(TestCase):
     @classmethod
-    def setUpClass(cls):
+    def setUpTestData(cls):
         """Add test book in to db."""
-        super().setUpClass()
         cls.book = Book.objects.create(
             title="Book Title",
             publication_year=2020,

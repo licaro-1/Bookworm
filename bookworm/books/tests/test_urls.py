@@ -11,11 +11,10 @@ User = get_user_model()
 
 class BookURLTests(TestCase):
     @classmethod
-    def setUpClass(cls):
+    def setUpTestData(cls):
         """
         Create book, user and template list
         """
-        super().setUpClass()
         cls.book = Book.objects.create(
             title="Test Book Title",
             publication_year=2000,

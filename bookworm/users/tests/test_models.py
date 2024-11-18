@@ -6,9 +6,8 @@ User = get_user_model()
 
 class UserModelTest(TestCase):
     @classmethod
-    def setUpClass(cls):
+    def setUpTestData(cls):
         """Add test user in to db."""
-        super().setUpClass()
         cls.user = User.objects.create_user(
             username="Alex",
             email="alex@gmail.com",

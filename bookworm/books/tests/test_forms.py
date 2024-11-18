@@ -15,8 +15,7 @@ User = get_user_model()
 
 class CommentCreateFormTest(TestCase):
     @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
+    def setUpTestData(cls):
         cls.user = User.objects.create_user(
             username="NoNameUser",
             email="nonameuser@gmail.com",
@@ -36,7 +35,6 @@ class CommentCreateFormTest(TestCase):
             rating=2,
             recommended=True
         )
-        cls.comment_context_checker = comment_context_checker
 
     def setUp(self):
         self.authorized_client = Client()
@@ -99,7 +97,8 @@ class CommentCreateFormTest(TestCase):
         # Check that a new comment is not created
         self.assertEqual(comments_count, Comment.objects.count())
         self.comment_for_update.refresh_from_db()
-        self.comment_context_checker(
+        comment_context_checker(
+            self,
             self.comment_for_update,
             expected_obj
         )
@@ -107,8 +106,7 @@ class CommentCreateFormTest(TestCase):
 
 class BookCreateFormTest(TestCase):
     @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
+    def setUpTestData(cls):
         cls.user = User.objects.create_user(
             username="NoNameUser1",
             email="nonameuser1@gmail.com",

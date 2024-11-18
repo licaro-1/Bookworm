@@ -11,8 +11,7 @@ User = get_user_model()
 
 class FeedbackCreationFormTest(TestCase):
     @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
+    def setUpTestData(cls):
         cls.user = User.objects.create_user(
             username="testuser",
             email="testuser@gmail.com",

@@ -13,8 +13,7 @@ User = get_user_model()
 
 class BookPagesTest(TestCase):
     @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
+    def setUpTestData(cls):
         cls.user = User.objects.create_user(
             username="NanoName",
             email="nanoname@gmail.com",
@@ -35,17 +34,17 @@ class BookPagesTest(TestCase):
             rating=2,
             recommended=True
         )
-        cls.book_context_checker = book_context_checker
-        cls.comment_context_checker = comment_context_checker
 
     def setUp(self):
         self.guest_client = Client()
         self.authorized_client = Client()
         self.authorized_client.force_login(self.user)
 
+
     def test_index_context(self):
         response = self.guest_client.get(reverse("books:index"))
-        self.book_context_checker(
+        book_context_checker(
+            self,
             response.context.get("page_obj")[0],
             self.book
         )
@@ -58,11 +57,13 @@ class BookPagesTest(TestCase):
         response = self.guest_client.get(
             reverse("books:book_detail", kwargs={"id": self.book.id})
         )
-        self.book_context_checker(
+        book_context_checker(
+            self,
             response.context.get("book"),
             self.book
         )
-        self.comment_context_checker(
+        comment_context_checker(
+            self,
             response.context.get("book_comments_page_obj")[0],
             self.comment
         )
@@ -96,7 +97,8 @@ class BookPagesTest(TestCase):
             1
         )
         # test that the book found matches the search query
-        self.book_context_checker(
+        book_context_checker(
+            self,
             response.context.get("page_obj")[0],
             linux_book
         )
@@ -108,8 +110,7 @@ class PaginatorViewsTest(TestCase):
     and book detail pages.
     """
     @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
+    def setUpTestData(cls):
         cls.user = User.objects.create_user(
             username="NoNameAuthor",
             email="nonameauthor@gmail.com",

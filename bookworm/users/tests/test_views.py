@@ -13,8 +13,7 @@ User = get_user_model()
 
 class UserPagesTest(TestCase):
     @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
+    def setUpTestData(cls):
         cls.user = User.objects.create_user(
             username="Bob",
             email="bob@gmail.com",
@@ -34,7 +33,6 @@ class UserPagesTest(TestCase):
             rating=4,
             recommended=True,
         )
-        cls.comment_context_checker = comment_context_checker
 
     def setUp(self):
         self.authorized_client = Client()
@@ -44,7 +42,8 @@ class UserPagesTest(TestCase):
         response = self.authorized_client.get(
             reverse("users:profile")
         )
-        self.comment_context_checker(
+        comment_context_checker(
+            self,
             response.context.get("latest_comments")[0],
             self.comment
         )
@@ -69,7 +68,8 @@ class UserPagesTest(TestCase):
             response.context.get("user"),
             self.user
         )
-        self.comment_context_checker(
+        comment_context_checker(
+            self,
             response.context.get("page_obj")[0],
             self.comment
         )
@@ -105,8 +105,7 @@ class UserPagesTest(TestCase):
 
 class PaginationViewsTest(TestCase):
     @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
+    def setUpTestData(cls):
         cls.user = User.objects.create_user(
             username="alexname",
             email="alexname@gmail.com",

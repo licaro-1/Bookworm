@@ -14,8 +14,7 @@ User = get_user_model()
 
 class UserCreationFormTest(TestCase):
     @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
+    def setUpTestData(cls):
         cls.form = CreationForm
 
     def setUp(self):
@@ -46,8 +45,7 @@ class UserCreationFormTest(TestCase):
 class UserUpdateFormTest(TestCase):
 
     @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
+    def setUpTestData(cls):
         cls.user = User.objects.create_user(
             username="UserNoName",
             email="usernameee@gmail.com",

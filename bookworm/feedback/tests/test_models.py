@@ -6,9 +6,8 @@ from users.models import User
 
 class FeedbackModelTest(TestCase):
     @classmethod
-    def setUpClass(cls):
+    def setUpTestData(cls):
         """Add test feedback in to db."""
-        super().setUpClass()
         cls.user = User.objects.create_user(
             username="feedbackauthor",
             email="feedbackauthor@gmail.com",
