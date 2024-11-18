@@ -23,20 +23,15 @@ jobs:
           pip install -r ./bookworm/requirements.txt
       - name: Test with flake8 and django tests
         env:
-          POSTGRES_USER: bookworm_user
-          POSTGRES_PASSWORD: bookworm_password
-          POSTGRES_DB: bookworm_db
-          DB_HOST: 127.0.0.1
-          DB_PORT: 5432
           DJANGO_SECRET: '23123123secret-key'
-          S3_HOST_URL: 'https://b136-3d624fd5227f.selstorage.ru/'
-          S3_ACCESS_KEY: 'ddksaklmapdsd2883133'
-          S3_SECRET_KEY: 'okdKmdssdms'
+          S3_HOST_URL: ${{ secrets.S3_HOST_URL }}
+          S3_ACCESS_KEY: ${{ secrets.S3_ACCESS_KEY }}
+          S3_SECRET_KEY: ${{ secrets.S3_SECRET_KEY }}
           EMAIL_FEEDBACK_RECIPIENT: 'test@example.com'
-          EMAIL_HOST_USER: 'your-email@example.com'
-          EMAIL_HOST_PASSWORD: 'your-email-password'
-          RECAPTCHA_PUBLIC_KEY: 'your-public-key'
-          RECAPTCHA_PRIVATE_KEY: 'your-private-key'
+          EMAIL_HOST_USER: 'email@example.com'
+          EMAIL_HOST_PASSWORD: 'email-password'
+          RECAPTCHA_PUBLIC_KEY: 'public-key'
+          RECAPTCHA_PRIVATE_KEY: 'private-key'
         run: |
           python -m flake8 bookworm/
           cd bookworm
