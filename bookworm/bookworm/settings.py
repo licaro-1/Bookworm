@@ -104,26 +104,34 @@ WSGI_APPLICATION = "bookworm.wsgi.application"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 
-TESTING = 'test' in sys.argv
+# TESTING = 'test' in sys.argv
+#
+# if TESTING:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#         }
+#     }
+# else:
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": os.getenv("DB_ENGINE", default="django.db.backends.postgresql"),
+#             "NAME": os.getenv("DB_NAME", default="postgres"),
+#             "USER": os.getenv("POSTGRES_USER", default="admin"),
+#             "PASSWORD": os.getenv("POSTGRES_PASSWORD", default="postgres"),
+#             "HOST": os.getenv("DB_HOST", default="db"),
+#             "PORT": os.getenv("DB_PORT", default=5432)
+#         }
+#     }
 
-if TESTING:
-    DATABASES = {
+DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
-    }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": os.getenv("DB_ENGINE", default="django.db.backends.postgresql"),
-            "NAME": os.getenv("DB_NAME", default="postgres"),
-            "USER": os.getenv("POSTGRES_USER", default="admin"),
-            "PASSWORD": os.getenv("POSTGRES_PASSWORD", default="postgres"),
-            "HOST": os.getenv("DB_HOST", default="db"),
-            "PORT": os.getenv("DB_PORT", default=5432)
-        }
-    }
+}
+
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
