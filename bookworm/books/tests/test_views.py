@@ -40,7 +40,6 @@ class BookPagesTest(TestCase):
         self.authorized_client = Client()
         self.authorized_client.force_login(self.user)
 
-
     def test_index_context(self):
         response = self.guest_client.get(reverse("books:index"))
         book_context_checker(
