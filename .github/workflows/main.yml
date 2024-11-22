@@ -70,7 +70,7 @@ jobs:
           username: ${{ secrets.SELECTEL_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          source: "docker-compose.prod.yaml"
+          source: "infra/docker-compose.prod.yaml"
           target: "Bookworm/infra/"
       - name: Executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
