@@ -5,7 +5,7 @@
 ### Bookworm - онлайн библиотека IT-книг с возможностью комментирования и их оценки.
 </div>
 
-
+[![tested](https://github.com/licaro-1/Bookworm/actions/workflows/main.yml/badge.svg?branch=main&event=push&job=tests)](https://github.com/licaro-1/Bookworm/actions/workflows/main.yml)
 
 <details>
 <summary style="font-size:25px; font-weight: bold;">Установка и запуск</summary>
@@ -42,16 +42,37 @@
     pip install -r .\bookworm\requirements.txt
     ```
 
-6. Запустить тесты
-   ```python
-   python .\bookworm\manage.py test .\bookworm
-   ```
 
-7. Создать файл nginx.prod.conf в директории infra/nginx и заполнить необходимой информацией
+6. Создать файл nginx.prod.conf в директории infra/nginx 
+и заполнить необходимой информацией по примеру nginx.prod.example.conf
+
 
 7. Поднять docker контейнеры
-```bash
+   ```bash
+      docker compose -f docker-compose.prod.yaml up --build
+   ```
 
-```
+8. Запустить миграции и подгрузить статику
+   ```python
+   docker exec -it infra-web-1 python manage.py migrate
+   docker exec -it infra-web-1 python manage.py collectstatic
+   ```
+9. Запустить тесты
+   ```python
+   docker exec -it infra-web-1 python manage.py tests
+   ```
 </details>
 
+
+
+
+## Технологии:
+
+--- 
+
+* Django 5
+* Loguru
+* PostgreSQL
+* Docker
+* Selectel S3
+* Nginx
