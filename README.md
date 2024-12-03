@@ -68,6 +68,7 @@
 <details>
 <summary style="font-size:25px; font-weight: bold; margin-top:20px;">Скриншоты</summary>
 
+####
 
 <details>
 <summary style="font-size:16px; font-weight: bold; margin-top:20px;">Главная страница</summary>
@@ -229,7 +230,6 @@
 
 ## Технологии:
 
---- 
 
 * Django 5
 * Tinymce
