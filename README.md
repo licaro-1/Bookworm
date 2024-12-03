@@ -73,9 +73,8 @@
 <details>
 <summary style="font-size:16px; font-weight: bold; margin-top:20px;">Главная страница</summary>
 
-<p style="font-size:14px;">Главная страница проекта с пагинацией и возможностью поиска книги по названию/описанию/автору</p>
+  ##### Главная страница проекта с пагинацией и возможностью поиска книги по названию/описанию/автору
 
----
 
 <a href="assets/page_assets/main/main.jpg" target="_blank">
     <img src="assets/page_assets/main/main.jpg" width="900px"/>
@@ -98,9 +97,7 @@
 <details>
 <summary style="font-size:16px; font-weight: bold; margin-top:20px;">Авторизация</summary>
 
-<p style="font-size:14px;">Авторизация проекта с возможностью восстановления пароля через почту</p>
-
----
+ #### Авторизация проекта с возможностью восстановления пароля через почту
 
 
 <a href="assets/page_assets/auth/auth_login.jpg" target="_blank">
@@ -128,9 +125,7 @@
 <details>
 <summary style="font-size:16px; font-weight: bold; margin-top:20px;">Книга</summary>
 
-<p style="font-size:14px;">Страница книги с наличием пагинации комментариев и возможностью комментирования, редактирования и удаления комментариев</p>
-
----
+ #### Страница книги с наличием пагинации комментариев и возможностью комментирования, редактирования и удаления комментариев
 
 
 <a href="assets/page_assets/book/book_page.jpg" target="_blank">
@@ -164,12 +159,9 @@
 <details>
 <summary style="font-size:16px; font-weight: bold; margin-top:20px;">Профиль</summary>
 
-<p style="font-size:14px;">
-Страница профиля пользователя с формой редактирования (есть возможность изменить юзернейм, имя, фамилию и аватар) и списком последних комментариев.
-Для администраторов и модераторов доступна форма добавления новой книги
-</p>
+ #### Страница профиля пользователя с формой редактирования (есть возможность изменить юзернейм, имя, фамилию и аватар) и списком последних комментариев. Для администраторов и модераторов доступна форма добавления новой книги
 
----
+
 
 <a href="assets/page_assets/profile/profile_page_card.jpg" target="_blank">
     <img src="assets/page_assets/profile/profile_page_card.jpg" width="900px"/>
@@ -202,11 +194,8 @@
 <details>
 <summary style="font-size:16px; font-weight: bold; margin-top:20px;">Форма обратной связи</summary>
 
-<p style="font-size:14px;">
-Страница формы обратной связи. После заполнения фидбек сохраняется в БД и отправляется на почту, получатель фидбека указан в переменной окружения EMAIL_FEEDBACK_RECIPIENT 
-</p>
+ #### Страница формы обратной связи. После заполнения фидбек сохраняется в БД и отправляется на почту, получатель фидбека указан в переменной окружения EMAIL_FEEDBACK_RECIPIENT
 
----
 
 <a href="assets/page_assets/feedback/feedback.jpg" target="_blank">
     <img src="assets/page_assets/feedback/feedback.jpg" width="900px"/>
