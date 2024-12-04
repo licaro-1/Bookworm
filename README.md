@@ -2,9 +2,15 @@
 
 <p style="text-align:center;"><img style="text-align:center;" src="assets/logo_card.jpg" alt="logo"/></p>
 
-### Bookworm - онлайн библиотека IT-книг с возможностью комментирования и их оценки.
+### Bookworm - онлайн библиотека IT-книг с возможностью комментирования и оценки
 
 </div>
+
+##
+
+[![tests](https://github.com/licaro-1/Bookworm/actions/workflows/tests.yml/badge.svg?event=push)](https://github.com/licaro-1/Bookworm/actions/workflows/tests.yml)
+[![CD](https://github.com/licaro-1/Bookworm/actions/workflows/cd.yml/badge.svg?branch=main)](https://github.com/licaro-1/Bookworm/actions/workflows/cd.yml)
+
 
 #### Функциональность:
 
@@ -12,12 +18,6 @@
 * Просмотр списка доступных IT книг.
 * Оставление комментариев и оценок к книгам.
 * Поиск книг по названию/автору/описанию.
-
-##
-
-[![tests](https://github.com/licaro-1/Bookworm/actions/workflows/tests.yml/badge.svg?event=push)](https://github.com/licaro-1/Bookworm/actions/workflows/tests.yml)
-[![CD](https://github.com/licaro-1/Bookworm/actions/workflows/cd.yml/badge.svg?branch=main)](https://github.com/licaro-1/Bookworm/actions/workflows/cd.yml)
-
 
 <details>
 <summary style="font-size:25px; font-weight: bold;">Установка и запуск</summary>
